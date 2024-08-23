@@ -13,13 +13,14 @@ class Branch
         $this->pdo = DB::connect();
     }
 
-    public function createBranch(string $name, string $address): bool
+    public function createBranch(string $name, string $address)
     {
         $stmt = $this->pdo->prepare("INSERT INTO branch (name, address, created_at)
                                           VALUES (:name, :address, NOW())");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':address', $address);
-        return $stmt->execute();
+        $stmt->execute();
+        return $this->pdo->lastInsertId();
     }
 
     public function updateBranch(int $id, string $name, string $address): bool
@@ -38,6 +39,12 @@ class Branch
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch();
+    }
+
+    public function getBranchs()
+    {
+        $query = "SELECT * from branch";
+        return $this->pdo->query($query)->fetchAll();
     }
 
     public function deleteBranch(int $id): bool
