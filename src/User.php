@@ -70,9 +70,9 @@ class User
         $stmt->execute();
     }
 
-    public function loginUser(string $username, string $pass): ?array
+    public function loginUser(string $username, string $pass): 
     {
-        $query = "SELECT * FROM users WHERE username = :username AND pass = :pass";
+        $query = "SELECT * FROM users WHERE username = :username AND pass = :pass";     
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':pass', $pass);

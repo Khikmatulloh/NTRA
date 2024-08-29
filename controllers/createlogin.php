@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 use App\User;
-
+dd($_POST);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $pass = $_POST['pass'] ;
 
-    if (!empty($email) && !empty($pass)) {
+    if (!empty($username) && !empty($pass)) {
         $user = (new User())->loginUser($username, $pass);
 
         if ($user) {

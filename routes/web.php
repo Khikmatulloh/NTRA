@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Router;
+use Controller\AdController;
+
 
 Router::get('/', fn()=> loadController('home'));
 
@@ -16,7 +18,7 @@ Router::get('/ads/create', fn()=> loadController('create-ad'));
 Router::post('/ads/create', fn()=> loadController('createAd'));
 
 
-Router::get('/login', fn()=> loadView('dashboard/create-login'));
+Router::get('/login', fn()=> loadView('dashboard/create-login'),'guest');
 Router::post('/login', fn()=> loadController('createlogin'));
 
 Router::get('/registar', fn()=> loadView('dashboard/create-registar'));
@@ -24,7 +26,8 @@ Router::post('/registar', fn()=> loadController('createuser'));
 
 
 
-
+Router::get('/admin', fn()=> loadView('dashboard/home'),'auth');
+Router::get('/profile2', fn()=> loadView(new \Controller\UserController())->loadProfile());
 
 
 
