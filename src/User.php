@@ -43,6 +43,16 @@ class User
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public function getByUsername(string $username, string $pass)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = :username AND pass = :pass");
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':pass', $pass);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
 
     public function updateUser(
         int $id,
@@ -70,7 +80,7 @@ class User
         $stmt->execute();
     }
 
-    public function loginUser(string $username, string $pass): 
+    public function loginUser(string $username, string $pass)
     {
         $query = "SELECT * FROM users WHERE username = :username AND pass = :pass";     
         $stmt = $this->pdo->prepare($query);

@@ -32,6 +32,7 @@
                                 id="firstName"
                                 type="text"
                                 placeholder="Enter Username"
+								name="username"
                             />
 						</div>
 						<!-- Password Field -->
@@ -43,6 +44,7 @@
                                 class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-black border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                 id="password"
                                 type="password"
+								name="pass"
                                 placeholder="******************"
                             />
 							<p class="text-xs italic text-red-500">Enter password.</p>

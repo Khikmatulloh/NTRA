@@ -238,6 +238,7 @@ loadPartials(path: 'header', loadFromPublic: false);
                                         </div>
                                     </div>
                                 </div>
+                                                                                                                                                                                                                                                                           
                                 <div class="border-t border-gray-100 dark:border-gray-700">
                                     <h5 class="text-xl font-semibold mt-4">Personal Details :</h5>
                                     <div class="mt-4">
@@ -309,12 +310,11 @@ loadPartials(path: 'header', loadFromPublic: false);
                         <div class="xl:col-span-9 lg:col-span-8 md:col-span-8 mt-6">
                             <div class="grid grid-cols-1 gap-6">
                                 <div class="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                                    <h5 class="text-xl font-semibold">Calvin Carlo</h5>
+                                <form action="/ads/create" method="POST">
+    <button type="submit" id="submit" name="send" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5">Create Add</button>
+</form>
 
-                                    <p class="text-slate-400 mt-3">I have started my career as a trainee and prove my
-                                        self and achieve all the milestone with good guidance and reach up to the
-                                        project manager. In this journey, I understand all the procedure which make me a
-                                        good developer, team leader, and a project manager.</p>
+                                    
                                 </div>
 
                                 <div class="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
