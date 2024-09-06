@@ -45,7 +45,7 @@ class Ads
     public function getAd($id)
     {
         $query = "SELECT ads.*, name AS image
-                  FROM ads
+                    FROM ads
                     JOIN ads_image ON ads.id = ads_image.ads_id
                   WHERE ads.id = :id";
 
@@ -107,6 +107,11 @@ class Ads
 
     public function deleteAds(int $id): array|false
     {
+        $image = $this->pdo->query("SELECT name FROM ads_image WHERE ads_id = $id")->fetch()->name;
+        if ($image!=="default.jpg"){
+            unlink("assets/images/ads/$image");
+        }
+
         $query = "DELETE FROM ads WHERE id = :id";
         $stmt  = $this->pdo->prepare($query);
         $stmt->bindParam(':id', $id);

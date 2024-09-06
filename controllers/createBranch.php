@@ -9,7 +9,7 @@ if (isset($_POST['name']) && isset($_POST['address']) ) {
    $branch =  (new Branch())-> createBranch($_POST['name'],$_POST['address']);
 
     if ($branch) {
-        header('Location: /branch');
+        header('Location: /admin');
         exit();
     }
 }

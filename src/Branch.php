@@ -41,6 +41,11 @@ class Branch
         return $stmt->fetch();
     }
 
+    public function getBranches()
+    {
+        return $this->pdo->query("Select * from branch")->fetchAll();
+    }
+
     public function getBranchs()
     {
         $query = "SELECT * from branch";

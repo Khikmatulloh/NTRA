@@ -238,7 +238,7 @@ loadPartials(path: 'header', loadFromPublic: false);
                                         </div>
                                     </div>
                                 </div>
-                                                                                                                                                                                                                                                                           
+
                                 <div class="border-t border-gray-100 dark:border-gray-700">
                                     <h5 class="text-xl font-semibold mt-4">Personal Details :</h5>
                                     <div class="mt-4">
@@ -310,11 +310,11 @@ loadPartials(path: 'header', loadFromPublic: false);
                         <div class="xl:col-span-9 lg:col-span-8 md:col-span-8 mt-6">
                             <div class="grid grid-cols-1 gap-6">
                                 <div class="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                                <form action="/ads/create" method="POST">
-    <button type="submit" id="submit" name="send" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5">Create Add</button>
-</form>
+                                    <a href="/ads/create" type="submit" id="submit" name="send"
+                                       class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5">Create
+                                        Add</a>
 
-                                    
+
                                 </div>
 
                                 <div class="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
@@ -328,10 +328,10 @@ loadPartials(path: 'header', loadFromPublic: false);
                                         foreach ($ads as $ad):?>
                                             <div class="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                                                 <div class="relative">
-                                                    <img src="../assets/images/ads/<?= $ad->image?>" alt="">
+                                                    <img src="../assets/images/ads/<?= $ad->image ?>" alt="">
 
                                                     <div class="absolute top-4 end-4">
-                                                        <a href="javascript:void(0)"
+                                                        <a href="/ads/update/<?= $ad->id ?>"
                                                            class="btn btn-icon bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-full text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"><i
                                                                     class="mdi mdi-heart text-[20px]"></i></a>
                                                     </div>
@@ -368,6 +368,14 @@ loadPartials(path: 'header', loadFromPublic: false);
 
                                                     </ul>
                                                 </div>
+                                                <div class="container mx-auto my-6">
+                                                    <form action="/ads/delete<?=$ad->id?>" method="post">
+                                                        <input type="hidden" name="_method" value="delete">
+                                                        <button type="submit" class="btn bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white rounded-md align-left">
+                                                            O'chirish
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div><!--end property content-->
                                         <?php
                                         endforeach; ?>
@@ -398,6 +406,13 @@ loadPartials(path: 'header', loadFromPublic: false);
             <!-- End -->
         </main>
         <!--End page-content" -->
+    </div>
+    <div class="container mx-auto my-6">
+        <form action="/ads/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this ad?');">
+            <button type="submit" class="btn bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white rounded-md">
+                Delete
+            </button>
+        </form>
     </div>
 
 <?php

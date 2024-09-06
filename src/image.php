@@ -10,6 +10,8 @@ class Image
 {
     private PDO $pdo;
 
+    const DEFAULT_IMAGE='default.jpg';
+    const DEFAULT_PATH='/assets/images/ads';
     public function __construct()
     {
         $this->pdo = DB::connect();
@@ -26,9 +28,26 @@ class Image
         return $statement->execute();
     }
 
+    public function getImagesByAdsId(int $adsId){
+        $stmt=$this->pdo->prepare("SELECT * FROM ads_image WHERE ads_id=:ads_id");
+        $stmt->bindParam(':ads_id', $adsId);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    public function update(int $Id, string $name): bool
+    {
+        $stmt=$this->pdo->prepare("UPDATE ads_image SET name=:name WHERE id=:id");
+        $stmt->bindParam(':id', $Id);
+        $stmt->bindParam(':name', $name);
+        return $stmt->execute();
+    }
     public function handleUpload(): string
     {
         // Check if file uploaded
+        if ($_FILES['image']['error'] == 4){
+            return 'default.jpg';
+        }
         if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
             exit('Error: '.$_FILES['image']['error']);
         }
@@ -55,5 +74,12 @@ class Image
         }
 
         return $fileName;
+    }
+
+    public static function show(string|null $file = null): string 
+    {
+        return $file 
+            ? self::DEFAULT_PATH . $file 
+            : self::DEFAULT_PATH . self::DEFAULT_IMAGE;
     }
 }

@@ -61,6 +61,45 @@ class Router
         }
     }
 
+    public static function patch($path, $callback, string|null $middleware = null): void
+    {
+        if (strtolower($_SERVER['REQUEST_METHOD']) === 'post') {
+            if(($_POST['_method']) =='patch'){
+                 if ((new self())->getResourceId()) {
+                     $path = str_replace('{id}', (string) (new self())->getResourceId(), $path);
+                     if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+                         $callback((new self())->getResourceId());
+                        exit();
+                }
+            }
+        
+            }
+            if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+                (new Authentication())->handle($middleware);
+                $callback();
+                exit();
+            }
+        }
+    }
+    public static function delete(string $path, $callback): void
+    {
+        if (!isset($_REQUEST['_method'])) return;
+
+        if (strtolower($_REQUEST['_method']) != 'delete') {
+            return;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if ((new self())->getResourceId()) {
+                $path = str_replace('{id}', (string)(new self())->getResourceId(), $path);
+                if ($path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)) {
+                    $callback((new self())->getResourceId());
+                    exit();
+                }
+            }
+        }
+    }
+
     public static function post($path, $callback): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === $path) {

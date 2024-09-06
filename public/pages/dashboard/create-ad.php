@@ -5,17 +5,17 @@ loadPartials('header');
 loadPartials('navbar');
 /**
  * @var $ad
+ * @var $branches
  */
 
 
 $uri = explode('/', $_SERVER['REQUEST_URI']);
+
 if (in_array('create', $uri)) {
     $action = '/ads/create';
-    $method = 'POST';
     $ad     = null;
 } else {
     $action = "/ads/update/$ad->id";
-    $method = 'PATCH';
 }
 ?>
     <div class="page-wrapper toggled">
@@ -267,12 +267,23 @@ if (in_array('create', $uri)) {
                             </div>
 
                             <div class="rounded-md shadow dark:shadow-gray-700 p-6 bg-white dark:bg-slate-900 h-fit">
-                                <form id="ads-create" action="<?=$action?>" method="<?=$method?>" enctype="multipart/form-data">
+                                <form id="ads-create" action="<?=$action?>" method="POST" enctype="multipart/form-data">
                                     <div class="grid grid-cols-12 gap-5">
                                         <div class="col-span-12">
+                                            <input type="hidden" name="_method" value="patch">
                                             <label for="title" class="font-medium">Sarlavha</label>
                                             <input name="title" id="title" type="text" class="form-input mt-2"
                                                    placeholder="Sarlavha" value="<?= $ad?->title ?>">
+                                        </div>
+                                        <div class="md:col-span-12">
+                                            <select name="branch_id" id="">
+                                                <?php foreach ($branches as $branch){
+                                                   $selected=($branch->id==$ad->branch_id?"selected":"");
+                                                    echo "<option value= '$branch->id'> $branch->name </option>";
+                                                }?>
+
+
+                                            </select>
                                         </div>
 
                                         <div class="md:col-span-4 col-span-12">
@@ -356,5 +367,5 @@ if (in_array('create', $uri)) {
     </div>
 
 <?php
-loadPartials(path: 'footer', loadFromPublic: false);
+loadPartials(path: 'footer', loadFromPublic: true);
 ?>

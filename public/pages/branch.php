@@ -1,7 +1,7 @@
 <?php
 
 loadPartials('header');
-loadPartials('navbar');
+
 ?>
 <!-- Start -->
 <section class="relative lg:py-24 py-16">
@@ -19,7 +19,7 @@ loadPartials('navbar');
 
                 <div class="p-6">
                     <div class="pb-6">
-                         <span class="text-slate-400">Name</span>
+                         <span class="text-slate-400">Name</span><br>
                         <a href="/branch/<?=$br->id?>" class="text-lg hover:text-green-600 font-medium ease-in-out duration-500"><?php echo $br->name; ?></a>
                     </div>
 
@@ -33,15 +33,26 @@ loadPartials('navbar');
 
                      
                     </ul>
+                    
+                    <ul class="pt-6 flex justify-between items-center list-none">
+                        <li>
+                            <span class="text-slate-400">vaqt</span>
+                            <p class="text-lg font-medium"><?php echo $br->created_at;?></p>
+                        </li>
+
+                     
+                    </ul>
                 </div>
             </div><!--end property content-->
             <?php endforeach; ?>
-
+            <a href="branch/create" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5">Qo'shish</a>
         </div><!--end grid-->
 
     </div><!--end container-->
 </section><!--end section-->
 <!-- End -->
+<?php
 
-<?php loadPartials('footer');
+loadPartials('footer');
+
 ?>
