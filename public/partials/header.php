@@ -23,7 +23,7 @@
     <!-- Main Css -->
     <link href="/dashboard/assets/libs/@iconscout/unicons/css/line.css" type="text/css" rel="stylesheet" />
     <link href="/dashboard/assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/dashboard/assets/css/tailwind.css" />
+
 
 </head>
 

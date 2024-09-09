@@ -22,6 +22,7 @@ Router::patch('/ads/update/{id}', fn(int $id) => (new AdController())->update($i
 
 Router::delete('/ads/delete/{id}', fn(int $id) => (new AdController())->delete($id));
 
+
 Router::get('/login', fn()=> loadView('dashboard/create-login'),'guest');
 Router::post('/login', fn() => (new \Controller\AuthController())->login());
 
@@ -46,4 +47,6 @@ Router::post('/status/create', fn()=> loadController('createStatus'));
 
 Router::get('/branch/create', fn()=> loadView('dashboard/create-branch'));
 Router::post('/branch/create', fn()=> loadController('createBranch'));
+Router::get('/search', fn() => (new AdController())->search());
+
 Router::errorResponse(404, 'Not Found');

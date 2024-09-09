@@ -369,7 +369,7 @@ loadPartials(path: 'header', loadFromPublic: false);
                                                     </ul>
                                                 </div>
                                                 <div class="container mx-auto my-6">
-                                                    <form action="/ads/delete<?=$ad->id?>" method="post">
+                                                    <form action="/ads/delete/<?=$ad->id?>" method="post">
                                                         <input type="hidden" name="_method" value="delete">
                                                         <button type="submit" class="btn bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white rounded-md align-left">
                                                             O'chirish

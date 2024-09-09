@@ -94,5 +94,21 @@ class AdController
     public function delete(int $id): void
     {
         $this->ads->deleteAds($id);
+        redirect('/profile');
+    }
+
+    public function search()
+    {
+        $searchPhrase = $_REQUEST['search_phrase'];
+        $ads          = (new Ads())->search($searchPhrase);
+        loadView('home', ['ads' => $ads]);
+    }
+
+    public function home()
+    {
+        $ads=$this->ads->getAds();
+        $branches=(new Branch())->getBranches();
+        loadView('home', ['ads' => $ads, 'branches' => $branches]);
+
     }
 }

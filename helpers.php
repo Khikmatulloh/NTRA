@@ -22,13 +22,11 @@ function basePath(string $path): string
     return __DIR__.$path;
 }
 
-function loadView(string $path, array|null $args = null, bool $loadFromPublic = true): void
+function loadView(string $path, array|null $args = null): void
 {
-    if ($loadFromPublic) {
-        $file = "/public/pages/$path.php";
-    } else {
+ 
         $file = "/resources/views/pages/$path.php";
-    }
+   
 
     $filePath = basePath($file);
 
@@ -43,7 +41,7 @@ function loadView(string $path, array|null $args = null, bool $loadFromPublic = 
     require $filePath;
 }
 
-function loadPartials(string $path, array|null $args = null, bool $loadFromPublic = true): void
+function loadPartials(string $path, array|null $args = null, bool $loadFromPublic = false): void
 {
     if (is_array($args)) {
         extract($args);
@@ -54,7 +52,6 @@ function loadPartials(string $path, array|null $args = null, bool $loadFromPubli
     } else {
         $file = "/resources/views/partials/$path.php";
     }
-
     require basePath($file);
 }
 
