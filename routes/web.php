@@ -10,7 +10,7 @@ use Controller\BranchController;
 
 
 
-Router::get('/', fn()=> loadController('home'));
+Router::get('/', fn()=> (new AdController())->home());
 
 Router::get('/branch', fn()=> loadController('branch'));
 Router::get('/ads/{id}', fn(int $id) => (new AdController())->show($id));

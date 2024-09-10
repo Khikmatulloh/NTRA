@@ -68,11 +68,12 @@ loadPartials('navbar');
                                                     Price :</label>
                                                 <div class="filter-search-form relative filter-border mt-2">
                                                     <i class="uil uil-usd-circle icons"></i>
-                                                    <select class="form-select" data-trigger name="choices-min-price"
+                                                    <select class="form-select" data-trigger name="min_price"
                                                             id="choices-min-price-buy"
+                                                            
                                                             aria-label="Default select example">
                                                         <option>Min Price</option>
-                                                        <option>500</option>
+                                                        <option>20</option>
                                                         <option>1000</option>
                                                         <option>2000</option>
                                                         <option>3000</option>
@@ -89,11 +90,12 @@ loadPartials('navbar');
                                                     Price :</label>
                                                 <div class="filter-search-form relative mt-2">
                                                     <i class="uil uil-usd-circle icons"></i>
-                                                    <select class="form-select" data-trigger name="choices-max-price"
+                                                    <select class="form-select" data-trigger name="max_price"
                                                             id="choices-max-price-buy"
+                                                            
                                                             aria-label="Default select example">
                                                         <option>Max Price</option>
-                                                        <option>500</option>
+                                                        <option>50</option>
                                                         <option>1000</option>
                                                         <option>2000</option>
                                                         <option>3000</option>

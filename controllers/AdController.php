@@ -99,10 +99,16 @@ class AdController
 
     public function search()
     {
+      
         $searchPhrase = $_REQUEST['search_phrase'];
-        $ads          = (new Ads())->search($searchPhrase);
+        $branch = $_GET['branch'] ? $_GET['branch'] : null;
+       
+        $min_price = $_GET['min_price'] ? $_GET['min_price'] : null;
+        $max_price = $_GET['max_price'] ? $_GET['max_price'] : null;
+        $ads = (new Ads())->search($searchPhrase, $branch,$min_price,$max_price);
         loadView('home', ['ads' => $ads]);
     }
+    
 
     public function home()
     {
