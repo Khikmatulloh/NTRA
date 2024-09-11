@@ -119,55 +119,38 @@ class Ads
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function search(?string $searchPhrase, ?string $branch = null,  ?string $minPrice = null, ?string $maxPrice = null): false|array
-    {
-        $searchPhrase = "%$searchPhrase%";
-        
-        $query        = "SELECT *, 
-                                ads.id AS id,
-                                ads.address AS address,
-                                ads_image.name AS image
-                         FROM ads
-                             JOIN branch ON branch.id = ads.branch_id
-                             LEFT JOIN ads_image ON ads.id = ads_image.ads_id
-                         WHERE (title LIKE :searchPhrase
-                             OR ads.description LIKE :searchPhrase)";
-    if ($searchPhrase) {
-        $query .= " AND title LIKE :searchPhrase";
-    }
+    public function search(
+        string $searchPhrase,
+        int|null $searchBranch = null,
+        int $searchMinPrice = 0,
+        int $searchMaxPrice = PHP_INT_MAX
+    ) {
+        $query = "SELECT *,
+                ads.id AS id,
+                ads.address AS address,
+                ads_image.name AS image
+            FROM ads
+            JOIN branch ON branch.id = ads.branch_id
+            LEFT JOIN ads_image ON ads.id = ads_image.ads_id
+            WHERE (title LIKE :searchPhrase
+                OR ads.description LIKE :searchPhrase)
+                AND price BETWEEN :minPrice AND :maxPrice";
 
-    if ($branch) {
-        $query .= " AND branch_id = :branch";
-    }
+        $params = [
+            ':searchPhrase' => "%$searchPhrase%",
+            ':minPrice' => $searchMinPrice,
+            ':maxPrice' => $searchMaxPrice
+        ];
 
-    if ($minPrice) {
-        $query .= " AND price >= :minPrice";
-    }
+        // Today PATCH: Search and filter refactored
+        if ($searchBranch) {
+            $query .= " AND branch_id = :searchBranch";
+            $params[':searchBranch'] = $searchBranch;
+        }
 
-    if ($maxPrice) {
-        $query .= " AND price <= :maxPrice";
-    }
-
-
-    $stmt = $this->pdo->prepare($query);
-
-  
-    if ($searchPhrase) {
-        $stmt->bindValue(':searchPhrase', "%$searchPhrase%");
-    }
-    if ($branch) {
-        $stmt=$this->pdo->prepare($query);
-        $stmt->bindParam(':branch', $branch);
-    }
-    if ($minPrice) {
-        $stmt->bindValue(':minPrice', $minPrice);
-    }
-    if ($maxPrice) {
-        $stmt->bindValue(':maxPrice', $maxPrice);
-    }
-
-    $stmt->execute();
-    return $stmt->fetchAll();
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
     }
 
 

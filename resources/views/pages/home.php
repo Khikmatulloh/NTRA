@@ -73,8 +73,8 @@ loadPartials('navbar');
                                                             
                                                             aria-label="Default select example">
                                                         <option>Min Price</option>
-                                                        <option>20</option>
-                                                        <option>1000</option>
+                                                        <option>50</option>
+                                                        <option>121</option>
                                                         <option>2000</option>
                                                         <option>3000</option>
                                                         <option>4000</option>

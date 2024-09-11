@@ -97,16 +97,31 @@ class AdController
         redirect('/profile');
     }
 
+//    public function search(): void
+//    {
+//
+//        $searchPhrase = $_REQUEST['search_phrase'];
+//        $searchBranch = $_GET['branch'] ? (int)$_GET['branch'] : null;
+//        $searchMinPrice = $_GET['min_price'] ? (int)$_GET['min_price'] : 0;
+//        $searchMaxPrice = $_GET['max_price'] ? (int)$_GET['max_price'] : PHP_INT_MAX;
+//
+//
+//        $ads = (new \App\Ads())->search($searchPhrase, $searchBranch, $searchMinPrice, $searchMaxPrice);
+//        $branches = (new \App\Branch())->getBranches();
+//        loadView('home', ['ads' => $ads, 'branches' => $branches]);
+//    }
     public function search()
     {
-      
+
         $searchPhrase = $_REQUEST['search_phrase'];
-        $branch = $_GET['branch'] ? $_GET['branch'] : null;
-       
-        $min_price = $_GET['min_price'] ? $_GET['min_price'] : null;
-        $max_price = $_GET['max_price'] ? $_GET['max_price'] : null;
-        $ads = (new Ads())->search($searchPhrase, $branch,$min_price,$max_price);
-        loadView('home', ['ads' => $ads]);
+        $searchBranch = $_GET['branch'] ?(int) $_GET['branch'] : null;
+
+        $searchMinPrice = $_GET['min_price'] ? (int)$_GET['min_price'] : null;
+        $searchMaxPrice = $_GET['max_price'] ?(int) $_GET['max_price'] :PHP_INT_MAX;
+        $ads = $this ->ads->search($searchPhrase,$searchBranch,$searchMinPrice,$searchMaxPrice);
+
+        $branches = (new \App\Branch())->getBranches();
+        loadView('home', ['ads' => $ads, 'branches' => $branches]);
     }
     
 
@@ -114,7 +129,7 @@ class AdController
     {
         $ads=$this->ads->getAds();
         $branches=(new Branch())->getBranches();
-        loadView('home', ['ads' => $ads, 'branches' => $branches]);
+        loadView('home', ['ads' => $ads]) ;
 
     }
 }
